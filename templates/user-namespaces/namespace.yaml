@@ -1,0 +1,19 @@
+{{ $attendees := (add1 .Values.attendees | int) }}
+{{- range $attendee := untilStep 1 $attendees 1 }}
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: user{{ $attendee }}-peachpal
+  labels:
+    kubernetes.io/metadata.name: user{{ $attendee }}-peachpal
+  annotations:
+    openshift.io/description: 'user{{ $attendee }} Peachpal Development Environment'
+    openshift.io/display-name: 'user{{ $attendee }}-peachpal'
+    openshift.io/requester: 'user{{ $attendee }}'
+spec:
+  finalizers:
+    - kubernetes
+status:
+  phase: Active
+{{- end}}
