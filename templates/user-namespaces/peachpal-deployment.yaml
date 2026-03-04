@@ -13,7 +13,7 @@ metadata:
 data:
   LOG_LEVEL: "DEBUG"
   GUARDRAILS_ENABLED: "false"
-  VLLM_MODEL: "llama32-fp8"
+  VLLM_MODEL: "{{ $.Values.maas_model_name }}"
   MAX_TOKENS: "200"
   TEMPERATURE: "0"
 ---
@@ -167,7 +167,7 @@ metadata:
     app.kubernetes.io/component: config
 type: Opaque
 stringData:
-  vllm-api-key: ""
+  vllm-api-key: "{{ $.Values.maas_model_api_key }}"
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
